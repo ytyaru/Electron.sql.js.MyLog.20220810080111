@@ -2,8 +2,8 @@ const { app, BrowserWindow, ipcMain, dialog } = require('electron')
 const path = require('path')
 const fs = require('fs')
 const initSqlJs = require('sql.js');
-//const util = require('util')
-//const childProcess = require('child_process');
+const util = require('util')
+const childProcess = require('child_process');
 const lib = new Map()
 
 function createWindow () {
@@ -82,10 +82,17 @@ ipcMain.handle('delete', async(event, ids)=>{
 ipcMain.handle('exportDb', async(event)=>{
     return lib.get(`DB`).export()
 })
-ipcMain.handle('existFile', (event, path)=>{ return fs.existsSync(path) })
+ipcMain.handle('exists', (event, path)=>{ return fs.existsSync(path) })
 ipcMain.handle('readFile', (event, path, kwargs)=>{ return readFile(path, kwargs) })
 ipcMain.handle('readTextFile', (event, path, encoding='utf8')=>{ return readFile(path, { encoding: encoding }) })
 ipcMain.handle('writeFile', (event, path, data)=>{ return fs.writeFileSync(path, data) })
+ipcMain.handle('shell', async(event, command) => {
+    const exec = util.promisify(childProcess.exec);
+    return await exec(command);
+    //let result = await exec(command);
+    //document.getElementById('result').value = result.stdout;
+})
+
 /*
 ipcMain.handle('delete', async(event, ids=null)=>{
     console.debug(ids)

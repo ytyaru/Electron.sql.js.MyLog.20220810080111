@@ -1,7 +1,7 @@
 class Setting {
     static PATH = `src/db/setting.json`
     static async load() {
-        const isExist = await window.myApi.existFile(this.PATH)
+        const isExist = await window.myApi.exists(this.PATH)
         if (!isExist) { await window.myApi.writeFile(this.PATH, JSON.stringify(
             {mona:{address:""},github:{username:"",token:"",repository:""}}
         )) }

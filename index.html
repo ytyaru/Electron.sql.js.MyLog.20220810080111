@@ -179,8 +179,9 @@ body {
 <fieldset><legend>設定</legend>
 <input type="text" id="address" placeholder="Mpurseアドレス"></input>
 <input type="text" id="github-username" placeholder="GitHubユーザ名"></input>
+<input type="email" id="github-email" placeholder="GitHubメールアドレス"></input>
 <input type="text" id="github-token" placeholder="GitHubアクセストークン"></input>
-<input type="text" id="github-repository" placeholder="GitHubリポジトリ"></input>
+<input type="text" id="github-repository" placeholder="GitHubリポジトリ" minlength="1" maxlength="100" pattern="[A-Za-z0-9_.-]{1,100}"></input>
 <button id="save-setting" type="button">保存</button>
 </fieldset>
 </div>

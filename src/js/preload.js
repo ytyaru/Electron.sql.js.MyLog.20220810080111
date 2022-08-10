@@ -16,10 +16,11 @@ contextBridge.exposeInMainWorld('myApi', {
     clear:async()=>await ipcRenderer.invoke('delete'),
     delete:async(ids)=>await ipcRenderer.invoke('delete', ids),
     exportDb:async()=>await ipcRenderer.invoke('exportDb'),
-    existFile:async(path)=>await ipcRenderer.invoke('existFile', path),
+    exists:async(path)=>await ipcRenderer.invoke('exists', path),
     readFile:async(path, kwargs)=>await ipcRenderer.invoke('readFile', path, kwargs),
     readTextFile:async(path, encoding='utf8')=>await ipcRenderer.invoke('readTextFile', path, encoding),
     writeFile:async(path, data)=>await ipcRenderer.invoke('writeFile', path, data),
+    shell:async(command)=>await ipcRenderer.invoke('shell', command),
     /*
     open:async()=>await ipcRenderer.invoke('open'),
     save:async()=>await ipcRenderer.invoke('save'),
